@@ -1,7 +1,7 @@
 defmodule ScenicNew.MixProject do
   use Mix.Project
 
-  @version "0.7.0"
+  @version "0.9.1"
   @github "https://github.com/boydm/scenic_new"
 
   def project do
@@ -21,11 +21,32 @@ defmodule ScenicNew.MixProject do
         maintainers: ["Boyd Multerer"],
         licenses: ["Apache 2"],
         links: %{github: @github},
-        files: ["static", "templates", "config", "test",
-          "mix.exs", ".formatter.exs", ".gitignore",
-          "LICENSE", "README.md", "lib"
+        files: [
+          "templates/**/*.jpg",
+          "templates/**/gitignore",
+          "templates/**/*.exs",
+          "templates/**/*.config",
+          "templates/**/*.args",
+          "templates/**/*.txt",
+          "templates/**/*.jpg",
+          "templates/**/*.png",
+          "templates/**/*.eex",
+          "config",
+          "test",
+          "mix.exs",
+          ".formatter.exs",
+          ".gitignore",
+          "LICENSE",
+          "README.md",
+          "lib/**/*.ex"
         ]
       ],
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.html": :test,
+        "coveralls.json": :test
+      ],
+      test_coverage: [tool: ExCoveralls]
     ]
   end
 
@@ -39,7 +60,8 @@ defmodule ScenicNew.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:ex_doc, ">= 0.0.0", only: [:dev, :docs]}
+      {:ex_doc, "~> 0.19", only: [:dev, :docs], runtime: false},
+      {:excoveralls, "~> 0.5.7", only: :test}
     ]
   end
 
@@ -59,8 +81,7 @@ defmodule ScenicNew.MixProject do
 
   defp description() do
     """
-    ScenicNew - Mix task to generate a starter app
+    ScenicNew - Mix task to generate a starter application
     """
   end
-
 end
